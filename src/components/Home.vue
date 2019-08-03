@@ -1,11 +1,6 @@
-<template><span>
-  <v-toolbar dark src="@/assets/toolbar-car.png">
-    <v-toolbar-title style="overflow:visible;">Surya subur rent car</v-toolbar-title>
-    <v-subheader class="ml-4" style="color:#FFF;font-size:15px;">Telp/WA: 085231538298</v-subheader>
-  </v-toolbar>
-  
+<template><v-app>
+  <Header />
   <v-content><v-container grid-list-md><v-layout wrap>
-  
     <v-flex xs12>
       <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
@@ -68,67 +63,40 @@
     </v-card></v-flex>
   
   </v-layout></v-container></v-content>
+  <Footer />
   
-    <v-footer
-    dark
-    padless
-  >
-    <v-card
-      class="flex"
-      flat
-      tile
-    >
-      <v-card-title class="teal">
-        <strong class="subheading">Telp / Wa : 085231538298</strong>
-
-        <v-spacer></v-spacer>
-
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4"
-          dark
-          icon
-        >
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
-      </v-card-title>
-
-      <v-card-actions class="grey darken-3 justify-center">
-        @{{ new Date().getFullYear() }}
-      </v-card-actions>
-    </v-card>
-  </v-footer>
-  
-</span></template>
+</v-app></template>
 <script>
   export default {
+    components: {
+      Footer: () => import('./corelayout/Footer'),
+      Header: () => import('./corelayout/Header')
+    },
     data () {
       return {
-      nama: '',
-      handphone: '',
-      email: '',
-      tujuan:'',
-      dropoff:'',
-      merkmobil:'',
-      bulans:['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-      haries:['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
-      tglpickupmenu:false,tglpickuptext:null,tglpickup:null,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
-      ],
-      kotapilihan: [],
+        nama: '',
+        handphone: '',
+        email: '',
+        tujuan:'',
+        dropoff:'',
+        merkmobil:'',
+        bulans:['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        haries:['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+        tglpickupmenu:false,tglpickuptext:null,tglpickup:null,
+        emailRules: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+/.test(v) || 'E-mail must be valid',
+        ],
+        kotapilihan: [],
         items: [{src: 'slide1.jpg'}
           ,{src: 'slide2.jpg'}
           ,{src: 'slide3.jpg'}
           ,{src: 'slide4.jpg'}
-        ],
-        icons: [
-          'fab fa-facebook',
-          'fab fa-twitter',
-          'fab fa-google-plus',
-          'fab fa-instagram',
+          ,{src: 'slide5.jpg'}
+          ,{src: 'slide6.jpg'}
+          ,{src: 'slide7.jpg'}
+          ,{src: 'slide8.jpg'}
+          ,{src: 'slide9.jpg'}
         ],
         wisatas:[
           {gambar:'wisata1.jpg', title:'Gunung bromo', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }

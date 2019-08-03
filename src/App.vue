@@ -1,1 +1,5 @@
-<template><v-app><router-view/></v-app></template>
+<template>
+    
+    <router-view />  
+  
+</template>
