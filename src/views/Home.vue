@@ -31,6 +31,14 @@
         </v-flex>
         <v-flex xs12 md4>
           <v-flex xs12>
+            <v-menu v-model="tglpickupmenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px" >
+              <template v-slot:activator="{ on }">
+                <v-text-field v-model="tglpickuptext" label="Tanggal pickup" prepend-icon="event" readonly v-on="on" ></v-text-field>
+              </template>
+              <v-date-picker v-model="tglpickup" @input="tglpickupmenu = false" locale="id" />
+            </v-menu>
+          </v-flex>
+          <v-flex xs12>
             <v-select :items="kotapilihan" item-text="kota" item-value="id" v-model="tujuan" label="Tujuan" />
           </v-flex>
           <v-flex xs12>
@@ -39,13 +47,14 @@
         </v-flex>
         <v-flex xs12 md4>
           <v-flex xs12>
-            <v-menu v-model="tglpickupmenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px" >
-              <template v-slot:activator="{ on }">
-                <v-text-field v-model="tglpickuptext" label="Tanggal pickup" prepend-icon="event" readonly v-on="on" ></v-text-field>
-              </template>
-              <v-date-picker v-model="tglpickup" @input="tglpickupmenu = false" locale="id" />
-            </v-menu>
+            <v-select :items="kotapilihan" item-text="kota" item-value="id" v-model="merkmobil" label="Merk mobil" />
           </v-flex>
+          <v-flex xs12>
+            <v-textarea solo name="input-7-4" label="Pesan lain" />
+          </v-flex>
+        </v-flex>
+        <v-flex xs12 class="text-right">
+          <v-btn color="success" dark large>Kirim</v-btn>
         </v-flex>
       </v-layout></v-container></v-form>
     </v-card></v-flex>
@@ -101,6 +110,7 @@
       email: '',
       tujuan:'',
       dropoff:'',
+      merkmobil:'',
       bulans:['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
       haries:['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
       tglpickupmenu:false,tglpickuptext:null,tglpickup:null,
