@@ -3,6 +3,8 @@ module.exports = {
   devServer: {
     host: process.env.HOSTNAME,
     port: process.env.PORT,
-    disableHostCheck: true
-  }
+    disableHostCheck: true,
+  },
+  lintOnSave: true,
+  filenameHashing: false
 }
