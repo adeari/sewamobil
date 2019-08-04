@@ -2,10 +2,8 @@
   <Header />
   <v-content><v-container grid-list-md><v-layout wrap>
     <v-flex xs12>
-      <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
-        <v-carousel-item v-for="(item,i) in items" :key="i">
-          <img :src="item.src" style="width:1880px;height:500px;"/>
-        </v-carousel-item>
+      <v-carousel cycle hide-delimiter-background show-arrows-on-hover interval=2000>
+        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" />
       </v-carousel></v-flex>
   
     <v-flex xs12><v-card class="mx-auto">
@@ -86,15 +84,15 @@
           v => /.+@.+/.test(v) || 'E-mail must be valid',
         ],
         kotapilihan: [],
-        items: [{src: 'slide1b.jpg'}
-          ,{src: 'slide2b.jpg'}
-          ,{src: 'slide3b.jpg'}
-          ,{src: 'slide4b.jpg'}
-          ,{src: 'slide5b.jpg'}
-          ,{src: 'slide6b.jpg'}
-          ,{src: 'slide7b.jpg'}
-          ,{src: 'slide8b.jpg'}
-          ,{src: 'slide9b.jpg'}
+        items: [{src: 'slide1c.jpg'}
+          ,{src: 'slide2c.jpg'}
+          ,{src: 'slide3c.jpg'}
+          ,{src: 'slide4c.jpg'}
+          ,{src: 'slide5c.jpg'}
+          ,{src: 'slide6c.jpg'}
+          ,{src: 'slide7c.jpg'}
+          ,{src: 'slide8c.jpg'}
+          ,{src: 'slide9c.jpg'}
         ],
         wisatas:[
           {gambar:'wisata1b.jpg', title:'Thailand', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
