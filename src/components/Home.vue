@@ -3,11 +3,9 @@
   <v-content><v-container grid-list-md><v-layout wrap>
     <v-flex xs12>
       <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
-        <v-carousel-item
-          v-for="(item,i) in items"
-          :key="i"
-          :src="item.src"
-        />
+        <v-carousel-item v-for="(item,i) in items" :key="i">
+          <img :src="item.src" style="width:1880px;height:500px;"/>
+        </v-carousel-item>
       </v-carousel></v-flex>
   
     <v-flex xs12><v-card class="mx-auto">
@@ -34,15 +32,15 @@
             </v-menu>
           </v-flex>
           <v-flex xs12>
-            <v-select :items="kotapilihan" item-text="kota" item-value="id" v-model="tujuan" label="Tujuan" />
+            <v-text-field v-model="tujuan" label="Tujuan" required />
           </v-flex>
           <v-flex xs12>
-            <v-select :items="kotapilihan" item-text="kota" item-value="id" v-model="dropoff" label="Drop off di" />
+            <v-text-field v-model="dropoff" label="Drop off di" required />
           </v-flex>
         </v-flex>
         <v-flex xs12 md4>
           <v-flex xs12>
-            <v-select :items="kotapilihan" item-text="kota" item-value="id" v-model="merkmobil" label="Merk mobil" />
+            <v-text-field v-model="merkmobil" label="Merk mobil" required />
           </v-flex>
           <v-flex xs12>
             <v-textarea solo name="input-7-4" label="Pesan lain" />
@@ -88,22 +86,22 @@
           v => /.+@.+/.test(v) || 'E-mail must be valid',
         ],
         kotapilihan: [],
-        items: [{src: 'slide1.jpg'}
-          ,{src: 'slide2.jpg'}
-          ,{src: 'slide3.jpg'}
-          ,{src: 'slide4.jpg'}
-          ,{src: 'slide5.jpg'}
-          ,{src: 'slide6.jpg'}
-          ,{src: 'slide7.jpg'}
-          ,{src: 'slide8.jpg'}
-          ,{src: 'slide9.jpg'}
+        items: [{src: 'slide1b.jpg'}
+          ,{src: 'slide2b.jpg'}
+          ,{src: 'slide3b.jpg'}
+          ,{src: 'slide4b.jpg'}
+          ,{src: 'slide5b.jpg'}
+          ,{src: 'slide6b.jpg'}
+          ,{src: 'slide7b.jpg'}
+          ,{src: 'slide8b.jpg'}
+          ,{src: 'slide9b.jpg'}
         ],
         wisatas:[
-          {gambar:'wisata1.jpg', title:'Thailand', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
-          ,{gambar:'wisata2.jpg', title:'Singapura', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
-          ,{gambar:'wisata3.jpg', title:'Arung jeram', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
-          ,{gambar:'wisata4.jpg', title:'Bromo', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
-          ,{gambar:'wisata5.jpg', title:'Air terjun', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
+          {gambar:'wisata1b.jpg', title:'Thailand', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
+          ,{gambar:'wisata2b.jpg', title:'Singapura', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
+          ,{gambar:'wisata3b.jpg', title:'Arung jeram', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
+          ,{gambar:'wisata4b.jpg', title:'Bromo', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
+          ,{gambar:'wisata5b.jpg', title:'Air terjun', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
         ],
       }
     },
@@ -140,7 +138,7 @@
       }
     },
     created() {
-      this.loadKota();
+      //this.loadKota();
       this.tglpickuptext = this.todays()
     }
   }
