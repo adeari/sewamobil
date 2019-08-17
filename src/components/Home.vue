@@ -2,22 +2,35 @@
   <Header />
   <v-content><v-container grid-list-md><v-layout wrap>
     <v-flex xs12>
-      <v-carousel cycle hide-delimiter-background show-arrows-on-hover interval=2000>
-        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" />
-      </v-carousel></v-flex>
+      <v-carousel cycle hide-delimiter-background show-arrows-on-hover interval=2000 height="800px" class="hidden-sm-and-down">
+        <v-carousel-item v-for="(item,i) in items" :key="i" >
+          <img :src="item.src" style="width:100%;height:100%;" alt="gambar" />
+        </v-carousel-item>
+      </v-carousel>
+      <v-carousel cycle hide-delimiter-background show-arrows-on-hover interval=2000 height="200px" class="hidden-sm-and-up">
+        <v-carousel-item v-for="(item,i) in items" :key="i" >
+          <img :src="item.src" style="width:100%;height:100%;" alt="gambar" />
+        </v-carousel-item>
+      </v-carousel>
+      <v-carousel cycle hide-delimiter-background show-arrows-on-hover interval=2000 height="320px" class="hidden-lg-and-up hidden-xs-only">
+        <v-carousel-item v-for="(item,i) in items" :key="i" >
+          <img :src="item.src" style="width:100%;height:100%;" alt="gambar" />
+        </v-carousel-item>
+      </v-carousel>
+    </v-flex>
   
     <v-flex xs12><v-card class="mx-auto">
       <v-alert type="info">Order form</v-alert>
-      <v-form><v-container><v-layout wrap>
+      <v-form ref="kirimForm" v-model="valid" v-show="kirimFormShow"><v-container><v-layout wrap>
         <v-flex xs12 md4>
           <v-flex xs12>
-            <v-text-field v-model="nama" label="Nama" required />
+            <v-text-field v-model="nama" label="Nama" :rules="requiredRules" required />
           </v-flex>
           <v-flex xs12>
             <v-text-field v-model="email" label="Email" :rules="emailRules" required />
           </v-flex>
           <v-flex xs12>
-            <v-text-field v-model="handphone" label="Handphone" required />
+            <v-text-field v-model="hp" label="Handphone" :rules="requiredRules" required />
           </v-flex>
         </v-flex>
         <v-flex xs12 md4>
@@ -30,24 +43,35 @@
             </v-menu>
           </v-flex>
           <v-flex xs12>
-            <v-text-field v-model="tujuan" label="Tujuan" required />
+            <v-text-field v-model="tujuan" label="Tujuan" :rules="requiredRules" required />
           </v-flex>
           <v-flex xs12>
-            <v-text-field v-model="dropoff" label="Drop off di" required />
+            <v-text-field v-model="dropoff" label="Drop off di" :rules="requiredRules" required />
           </v-flex>
         </v-flex>
         <v-flex xs12 md4>
           <v-flex xs12>
-            <v-text-field v-model="merkmobil" label="Merk mobil" required />
+            <v-text-field v-model="merkmobil" label="Merk mobil" :rules="requiredRules" required />
           </v-flex>
           <v-flex xs12>
-            <v-textarea solo name="input-7-4" label="Pesan lain" />
+            <v-textarea solo name="input-7-4" label="Pesan lain" v-model="pesan" />
           </v-flex>
         </v-flex>
-        <v-flex xs12 class="text-right">
+        <v-flex xs12 class="text-right" v-show="showkirim && !loaderShow" v-on:click="showKirim">
           <v-btn color="success" dark large>Kirim</v-btn>
         </v-flex>
+        <v-flex xs12 class="text-right" v-show="!showkirim && !loaderShow">
+          Apakah data sudah terisi dengan benar ? &nbsp;&nbsp;<v-btn color="success" dark large v-on:click="kirimkan()">Ya</v-btn> &nbsp;&nbsp;&nbsp;<v-btn color="warning" dark large v-on:click="showkirim = !showkirim">Tidak</v-btn>
+        </v-flex>
+        <v-flex xs12 v-show="loaderShow">
+          <v-progress-linear color="light-green darken-4" height="10" indeterminate value="20" striped />
+        </v-flex>
       </v-layout></v-container></v-form>
+      <v-flex xs12 class="text-center" v-show="!kirimFormShow">
+          <v-alert type="success">
+            Terima kasih, mohon tunggu info dari kami.
+          </v-alert>
+        </v-flex>
     </v-card></v-flex>
       
     <v-flex xs12 md4 v-for="(wisata, index)  in wisatas" :key="index"><v-card>
@@ -70,29 +94,34 @@
     },
     data () {
       return {
-        nama: '',
-        handphone: '',
+        valid: true,kirimFormShow:true,showkirim:true,loaderShow:false,
+        nama: '',hp: '',
         email: '',
         tujuan:'',
         dropoff:'',
         merkmobil:'',
+        pesan:'',
         bulans:['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
         haries:['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
         tglpickupmenu:false,tglpickuptext:null,tglpickup:null,
         emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+/.test(v) || 'E-mail must be valid',
+          v => !!v || 'Membutuhkan Email',
+          v => /.+@.+/.test(v) || 'E-mail harus sesuai',
         ],
-        kotapilihan: [],
-        items: [{src: 'slide1c.jpg'}
-          ,{src: 'slide2c.jpg'}
-          ,{src: 'slide3c.jpg'}
-          ,{src: 'slide4c.jpg'}
-          ,{src: 'slide5c.jpg'}
-          ,{src: 'slide6c.jpg'}
-          ,{src: 'slide7c.jpg'}
-          ,{src: 'slide8c.jpg'}
-          ,{src: 'slide9c.jpg'}
+        requiredRules: [
+          v => !!v || 'Harus di isi',
+        ],
+        items: [{src: 'slide1d.jpg'}
+          ,{src: 'slide2d.jpg'}
+          ,{src: 'slide3d.jpg'}
+          ,{src: 'slide4d.jpg'}
+          ,{src: 'slide5d.jpg'}
+          ,{src: 'slide6d.jpg'}
+          ,{src: 'slide7d.jpg'}
+          ,{src: 'slide8d.jpg'}
+          ,{src: 'slide9d.jpg'}
+          ,{src: 'slide10d.jpg'}
+          ,{src: 'slide11d.jpg'}
         ],
         wisatas:[
           {gambar:'wisata1b.jpg', title:'Thailand', text:'wisata yang terletak di sana ada mereaka pergi wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata wisata' }
@@ -105,39 +134,62 @@
     },
     computed: {
       computedDateFormatted () {
-        return this.formatDate(this.tglpickup)
+        return this.formatDate(this.tglpickup);
       },
     },
     watch: {
       tglpickup () {
-        this.tglpickuptext = this.formatDate(this.tglpickup)
-      },
+        this.tglpickuptext = this.formatDate(this.tglpickup);
+      }
     },
     methods: {
-      loadKota(){
-        var vueku = this
-        fetch(process.env.VUE_APP_API_URL+'kota').then(response => response.json()).then(data => {
-          vueku.kotapilihan = data;
-        });
-      },
       formatDate (tglpickup) {
-        if (!tglpickup) return null
-        const [year, month, day] = tglpickup.split('-')
-        var mm = parseInt(month) - 1
-        var mydate = new Date(tglpickup)
-        return this.haries[mydate.getDay()] +', '+day+' '+this.bulans[mm]+' '+year
+        if (!tglpickup) return null;
+        const [year, month, day] = tglpickup.split('-');
+        var mm = parseInt(month) - 1;
+        var mydate = new Date(tglpickup);
+        return this.haries[mydate.getDay()] +', '+day+' '+this.bulans[mm]+' '+year;
       },
       todays () {
-        var today = new Date()
-        var dd = String(today.getDate()).padStart(2, '0')
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
         var mm = today.getMonth(); //January is 0!
-        var yyyy = today.getFullYear()
-        return this.haries[today.getDay()] +', '+dd+' '+this.bulans[mm]+' '+yyyy
+        var yyyy = today.getFullYear();
+        return yyyy+'-'+mm+'-'+dd;
+      },
+      showKirim () {
+        if (this.$refs.kirimForm.validate()) {
+          this.showkirim = !this.showkirim;
+        }
+      },
+      kirimkan () {
+        var vueku = this;
+        if (vueku.$refs.kirimForm.validate()) {
+          this.loaderShow = true;
+          var formData = new FormData();
+          formData.append('nama', vueku.nama);
+          formData.append('email', vueku.email);
+          formData.append('hp', vueku.hp);
+          formData.append('tanggal_pickup', vueku.tglpickup);
+          formData.append('tujuan', vueku.tujuan);
+          formData.append('dropoff', vueku.dropoff);
+          formData.append('merkmobil', vueku.merkmobil);
+          formData.append('tanggal_pickup_show', vueku.tglpickuptext);
+          formData.append('pesan', vueku.pesan);
+          fetch(process.env.VUE_APP_API_URL+'kirim', {  body: formData, method: 'POST' }).then(response => response.json()).then(data => {
+            if (data.status) {
+              vueku.kirimFormShow = false;
+              window.scrollTo(0,20)
+            } else {
+              alert(data.msg);
+            }
+            this.loaderShow = false;
+          });
+        }
       }
     },
     created() {
-      //this.loadKota();
-      this.tglpickuptext = this.todays()
-    }
+      this.tglpickup = this.todays();
+    },
   }
 </script>
