@@ -60,8 +60,8 @@
 export default {
   data: () => ({
     valid:true,
-    username:'  ',
-    passwd:'  ',
+    username:'',
+    passwd:'',
     requiredRules: [
       v => !!v || 'Harus di isi',
     ],
